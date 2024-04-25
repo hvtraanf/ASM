@@ -44,16 +44,12 @@ namespace ASM.Controllers
         }
 
         [Authorize(Roles = "ADMIN")]
-        // GET: Employers/Create
         public IActionResult Create()
         {
             return View();
         }
 
         [Authorize(Roles = "ADMIN")]
-        // POST: Employers/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("EmployerId,CompanyName,ContactEmail")] Employer employer)
@@ -67,8 +63,6 @@ namespace ASM.Controllers
             return View(employer);
         }
 
-        //[Authorize(Roles = "ADMIN")]
-        // GET: Employers/Edit/5
         public async Task<IActionResult> Edit()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -81,10 +75,6 @@ namespace ASM.Controllers
             return View(employer);
         }
 
-        //[Authorize(Roles = "ADMIN")]
-        // POST: Employers/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit([Bind("EmployerId,CompanyName,ContactEmail,UserId")] Employer employer)
@@ -119,7 +109,6 @@ namespace ASM.Controllers
         }
 
         [Authorize(Roles = "ADMIN")]
-        // GET: Employers/Delete/5
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
@@ -138,7 +127,6 @@ namespace ASM.Controllers
         }
 
         [Authorize(Roles = "ADMIN")]
-        // POST: Employers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
