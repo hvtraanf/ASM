@@ -23,7 +23,6 @@ namespace ASM.Controllers
             _webHostEnvironment = webHostEnvironment;
         }
 
-        // GET: JobApplications
         public async Task<IActionResult> Index()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -44,7 +43,6 @@ namespace ASM.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: JobApplications/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -64,7 +62,6 @@ namespace ASM.Controllers
             return View(jobApplication);
         }
 
-        // GET: JobApplications/Create
         public IActionResult Create(int id)
         {
             ViewData["JobListingId"] = id; //new SelectList(_context.JobListing, "Id", "Id", id);
@@ -75,14 +72,10 @@ namespace ASM.Controllers
             return View();
         }
 
-        // POST: JobApplications/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("JobApplicationId,ApplicationDate,CoverLetterFile,ApplicationStatus,JobSeekerId,JobListingId")] JobApplication jobApplication)
         {
-            //jobApplication.CoverLetter = "None";
             if (ModelState.IsValid)
             {
                 if (jobApplication.CoverLetterFile != null && jobApplication.CoverLetterFile.Length > 0)
@@ -112,7 +105,6 @@ namespace ASM.Controllers
             return View(jobApplication);
         }
 
-        // GET: JobApplications/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -130,9 +122,6 @@ namespace ASM.Controllers
             return View(jobApplication);
         }
 
-        // POST: JobApplications/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("JobApplicationId,ApplicationDate,CoverLetter,ApplicationStatus,JobSeekerId,JobListingId")] JobApplication jobApplication)
@@ -167,7 +156,6 @@ namespace ASM.Controllers
             return View(jobApplication);
         }
 
-        // GET: JobApplications/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -187,7 +175,6 @@ namespace ASM.Controllers
             return View(jobApplication);
         }
 
-        // POST: JobApplications/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
