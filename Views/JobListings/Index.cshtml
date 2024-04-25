@@ -1,0 +1,101 @@
+﻿@model IEnumerable<ASM.Models.JobListing>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Job Listings</h1>
+
+@if (User.IsInRole("EMPLOYER"))
+{
+<p>
+    <a class="btn btn-primary" asp-action="Create">➕ Create New Job Listing</a>
+</p> 
+}
+@* <form>
+    <table>
+        <tr>
+            <td>Job Title</td>
+            <td><input type="text" name="jobtitle"></td>
+        </tr>
+        <tr>
+            <td>Industry</td>
+            <td><input type="text" name="jobcategory"></td>
+        </tr>
+        <tr>
+            <td>City</td>
+            <td><input type="text" name="joblocation"></td>
+        </tr>
+        <tr>
+            <td>Search</td>
+            <td><input type="submit" name="submit"></td>
+        </tr>
+    </table>
+</form> *@
+<table id="table1" class="table display">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.JobTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.JobDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.JobRequirement)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.JobType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ApplicationDeadline)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Employer)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.JobTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JobDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JobRequirement)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JobType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApplicationDeadline)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Employer.CompanyName)
+            </td>
+            <td>
+                @if (User.IsInRole("JOBSEEKER"))
+                {
+                    <a asp-controller="JobApplications" asp-action="Create" asp-route-id="@item.Id">Apply</a>
+                }
+                @if (User.IsInRole("EMPLOYER"))
+                {
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> 
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> 
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+@section Scripts {
+    <script>
+        let table = new DataTable('#table1');
+    </script>
+}

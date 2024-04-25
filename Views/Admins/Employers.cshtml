@@ -1,0 +1,47 @@
+﻿@model IEnumerable<ASM.Models.Employer>
+
+@{
+    ViewData["Title"] = "Employers";
+}
+
+<h1>Employers</h1>
+
+@* <p>
+    <a asp-action="RegisterUser">Create New</a>
+</p> *@
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CompanyName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContactEmail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CompanyName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactEmail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.Id)
+            </td>
+            <td>
+                    <a asp-action="EditEmployers" asp-route-id="@item.EmployerId">Edit</a> |
+                    <a asp-action="DetailsEmployers" asp-route-id="@item.EmployerId">Details</a> |
+                    <a asp-action="DeleteEmployers" asp-route-id="@item.EmployerId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

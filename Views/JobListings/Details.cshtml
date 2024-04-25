@@ -1,0 +1,112 @@
+﻿@model ASM.Models.JobListing
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Job Listing Details</h1>
+
+<div>
+    <h4>JobListing</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.JobTitle)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.JobTitle)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.JobDescription)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.JobDescription)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.JobRequirement)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.JobRequirement)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.JobType)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.JobType)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ApplicationDeadline)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ApplicationDeadline)
+        </dd>
+@*         <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Employer)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Employer.EmployerId)
+        </dd> *@
+    </dl>
+
+    <h4>👥 Applicants</h4>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @* @Html.DisplayNameFor(model => model.JobApplications.ApplicationDate) *@
+                    ApplicationDate
+                </th>
+                <th>
+                    @* @Html.DisplayNameFor(model => model.JobApplication.CoverLetter) *@
+                    CoverLetter
+                </th>
+                <th>
+                    @* @Html.DisplayNameFor(model => model.JobApplication.ApplicationStatus) *@
+                    ApplicationStatus
+                </th>
+                <th>
+                    @* @Html.DisplayNameFor(model => model.JobApplication.Seekers) *@
+                    Seekers
+                </th>
+                <th>
+                    @* @Html.DisplayNameFor(model => model.JobApplication.Listing) *@
+                    Listing
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.JobApplications)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ApplicationDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CoverLetter)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ApplicationStatus)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.JobSeekerId)
+                        <a asp-controller="JobSeekers" asp-action="Details" asp-route-id="@item.JobSeekerId">Job seeker</a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Listing.Id)                        
+                    </td>
+                    <td>
+                        <a asp-action="ManageJobApplication" asp-route-id="@item.JobApplicationId">Manage</a> |
+                        @* <a asp-action="Delete" asp-route-id="@item.JobApplicationId">Delete</a> *@
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

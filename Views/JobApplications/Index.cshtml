@@ -1,0 +1,66 @@
+﻿@model IEnumerable<ASM.Models.JobApplication>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+@if (ViewBag.Success)
+{
+    <div class="alert alert-success" role="alert">
+        Apply successful
+    </div>
+}
+
+@* <p>
+    <a asp-action="Create">Create New</a>
+</p> *@
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ApplicationDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CoverLetter)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ApplicationStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Seekers)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Listing)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApplicationDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CoverLetter)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApplicationStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Seekers.JobSeekerId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Listing.Id)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.JobApplicationId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.JobApplicationId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.JobApplicationId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,71 @@
+﻿@model IEnumerable<ASM.Models.JobListing>
+
+@{
+    ViewData["Title"] = "JobListings";
+}
+
+<h1>JobListings</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.JobTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.JobDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.JobRequirement)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.JobType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ApplicationDeadline)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Approved)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Employer)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.JobTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JobDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JobRequirement)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JobType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApplicationDeadline)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Approved)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Employer.EmployerId)
+            </td>
+            <td>
+                <a asp-action="EditJobListing" asp-route-id="@item.Id">Edit</a> |
+@*                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> *@
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

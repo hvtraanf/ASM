@@ -1,0 +1,55 @@
+﻿@model ASM.Models.JobApplication
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>JobApplication</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ApplicationDate" value="@DateTime.Now" />
+            <input type="hidden" asp-for="ApplicationStatus" value="Pending" />
+            <input type="hidden" asp-for="JobSeekerId" value="@ViewBag.JobSeekerId" />
+            <input type="hidden" asp-for="JobListingId" value="@ViewBag.JobListingId" />
+@*             <div class="form-group">
+                <label asp-for="ApplicationDate" class="control-label"></label>
+                <input asp-for="ApplicationDate" class="form-control" readonly />
+                <span asp-validation-for="ApplicationDate" class="text-danger"></span>
+            </div> *@
+            <div class="form-group">
+                <label asp-for="CoverLetterFile">Upload CV:</label>
+                <input asp-for="CoverLetterFile" class="form-control-file">
+            </div>
+@*             <div class="form-group">
+                <label asp-for="ApplicationStatus" class="control-label"></label>
+                <input asp-for="ApplicationStatus" class="form-control" />
+                <span asp-validation-for="ApplicationStatus" class="text-danger"></span>
+            </div> *@
+@*             <div class="form-group">
+                <label asp-for="JobSeekerId" class="control-label"></label>
+                <select asp-for="JobSeekerId" class ="form-control" asp-items="ViewBag.JobSeekerId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="JobListingId" class="control-label"></label>
+                <select asp-for="JobListingId" class ="form-control" asp-items="ViewBag.JobListingId"></select>
+            </div> *@
+            <hr />
+            <div class="form-group">
+                <input type="submit" value="Send Application ✅" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<hr />
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
