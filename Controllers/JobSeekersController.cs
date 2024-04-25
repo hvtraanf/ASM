@@ -21,13 +21,11 @@ namespace ASM.Controllers
             _context = context;
         }
 
-        // GET: JobSeekers
         public async Task<IActionResult> Index()
         {
             return View(await _context.JobSeeker.ToListAsync());
         }
 
-        // GET: JobSeekers/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -46,16 +44,12 @@ namespace ASM.Controllers
         }
 
         [Authorize(Roles = "ADMIN")]
-        // GET: JobSeekers/Create
         public IActionResult Create()
         {
             return View();
         }
 
         [Authorize(Roles = "ADMIN")]
-        // POST: JobSeekers/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("JobSeekerId,Fullname,Email")] JobSeeker jobSeeker)
@@ -69,33 +63,9 @@ namespace ASM.Controllers
             return View(jobSeeker);
         }
 
-        //[Authorize()]
-        //// GET: JobSeekers/Edit/5
-        //public async Task<IActionResult> Edit(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var jobSeeker = await _context.JobSeeker.FindAsync(id);
-        //    if (jobSeeker == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        //    if (jobSeeker.UserId != userId)
-        //    {
-        //        return Forbid(); // or return Unauthorized(); depending on your requirements
-        //    }
-        //    return View(jobSeeker);
-        //}
-
         [Authorize()]
         public async Task<IActionResult> Edit()
         {
-
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             var jobSeeker = await _context.JobSeeker.Where(x=>x.UserId== userId).FirstOrDefaultAsync();
@@ -108,9 +78,6 @@ namespace ASM.Controllers
         }
 
         [Authorize()]
-        // POST: JobSeekers/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit([Bind("JobSeekerId,Fullname,Email,UserId")] JobSeeker jobSeeker)
@@ -119,7 +86,6 @@ namespace ASM.Controllers
             //{
             //    return NotFound();
             //}
-
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             //jobSeeker = await _context.JobSeeker.Where(x => x.UserId == userId).FirstOrDefaultAsync();
 
@@ -153,7 +119,6 @@ namespace ASM.Controllers
         }
 
         [Authorize(Roles = "ADMIN")]
-        // GET: JobSeekers/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -172,7 +137,6 @@ namespace ASM.Controllers
         }
 
         [Authorize(Roles = "ADMIN")]
-        // POST: JobSeekers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
